@@ -1,0 +1,19 @@
+{
+    "name"         : "WebMQonttrol",
+    "version"      : "0.1.1",
+    "description"  : "Relay server for websocket/MQTT messages",
+    "homepage"     : "https://github.com/guibom/WebMQonttrol",
+    "license"      : "MIT",
+    "repository"   : {
+        "type":"git",
+        "url":"https://github.com/guibom/WebMQonttrol.git"
+    },
+    "main"         : "WebMQonttrol_server.js",
+    "dependencies": {
+        "mqtt": "*",
+        "socket.io": "*"
+    },
+    "engines": {
+        "node": ">=10.*"
+    }
+}

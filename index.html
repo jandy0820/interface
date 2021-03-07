@@ -1,0 +1,376 @@
+<!-- Copyright (c) 2014, Guilherme Ramos <longinus@gmail.com> -->
+<!-- https://github.com/guibom/WebMQonttrol -->
+<!-- Released under the MIT license. See LICENSE file for details. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Home Control</title>
+
+    <!-- Bootstrap and Bootstrap-Slider CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/weather-icons.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/jquery.nouislider.min.css" rel="stylesheet">
+    <style>
+        .label {
+          padding: .2em .2em .3em;
+        }
+        .row {margin:  -7.5px}
+        [class*="col-"] {padding: 2px 4px;}
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="container">
+            <!-- Shows error messages and other alerts -->
+            <div id="alertWindow"></div>
+
+        <!-- TAB Header -->
+            <div class="panel panel-default" style="border-radius: 0px; border: 0px; box-shadow: 0px 0px 0px 0px; margin-bottom: 0px">
+                <div class="panel-body" style="border-radius: 0px; ">
+                    <ul class="nav nav-tabs nav-justified" id="topTab">
+                      <li class="active"><a href="#" id="Tab_Main" class="tab_control"><span class="glyphicon glyphicon-home"></span> Main</a></li>
+                      <li><a href="#" id="Tab_Controller_Light" class="tab_control"><span class="glyphicon glyphicon-flash"></span> Light</a></li>
+                      <li><a href="#" id="Tab_Player_MPC" class="tab_control"><span class="glyphicon glyphicon-film"></span> MPC</a></li>
+                      <li><a href="#" id="Tab_Player_iTunes" class="tab_control"><span class="glyphicon glyphicon-music"></span> iTunes</a></li>
+                      <li><a href="#" id="Tab_Controller_PC" class="tab_control"><span class="glyphicon glyphicon-hdd"></span> PC</a></li>
+                      <li><a href="#" id="Tab_Status_Weather" class="tab_control"><i class="wi-horizon-alt"></i> Weather</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        <!-- TAB PANE START -->
+            <div class="tab-content">
+
+            <!-- START Light Control Panel -->
+                <div class="tab-pane panel panel-default active Tab_Controller_Light Tab_Main" id="Controller_Light">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="label label-default"><span class="glyphicon glyphicon-flash"></span> Light Control</span></h3>
+                    </div>
+                    <!-- Light 1 -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">Sofa light</span></h2>
+                            </div>
+                            <div class="col-sm-1 col-xs-3">
+                                <h2><span id="Light_1_Brightness" class="label label-default" style="vertical-align:top; display: block;">N/A</span></h2>
+                            </div>
+                            <div class="col-sm-5 col-xs-5" style="text-align:center; padding-top: 28px; padding-left: 20px; padding-right: 20px">
+                                <div class="noUiSlider" id="slider1"></div>
+                            </div>
+                            <div class="col-sm-2 col-xs-4" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id="Light_1" class="btn btn-block btn-lg btn-danger WMQ_light" role="button" style="vertical-align:bottom; "><span class="glyphicon glyphicon-remove"></span> N/A</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Light 2 -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-10" >
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">TV light</span></h2>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id="Light_2" class="btn btn-block btn-lg btn-danger WMQ_light" role="button" style="vertical-align:bottom;"><span class="glyphicon glyphicon-remove"></span> N/A</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Light 3 -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-10" >
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">Recliner light</span></h2>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id="Light_3" class="btn btn-block btn-lg btn-danger WMQ_light" role="button" style="vertical-align:bottom;"><span class="glyphicon glyphicon-remove"></span> N/A</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Light 4 -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-10" >
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">Living room light</span></h2>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id='Light_4' class="btn btn-block btn-lg btn-danger WMQ_light" role="button" style="vertical-align:bottom;"><span class="glyphicon glyphicon-remove"></span> N/A</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Light 7 -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-10" >
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">Chair light</span></h2>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id='Light_7' class="btn btn-block btn-lg btn-danger WMQ_light" role="button" style="vertical-align:bottom;"><span class="glyphicon glyphicon-remove"></span> N/A</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Light ALL -->
+                    <div class="panel-body" style="padding-top: 0px; padding-bottom: 0px">
+                        <div class="row">
+                            <div class="col-sm-8" >
+                                <h2><span class="label label-info" style="vertical-align:top; display: block; text-align:left; padding: .2em .4em .3em;">All lights</span></h2>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id="Light_All_On" class="btn btn-block btn-lg btn-primary WMQ_light WMQ_BTN_single" role="button" style="vertical-align:bottom;" data-WMQ='XXXX'><span class="glyphicon glyphicon-ok"></span> ON</a>
+                            </div>
+                            <div class="col-sm-2" style="text-align:right; vertical-align:center; padding-top: 14px; "><a href="#" id="Light_All_Off" class="btn btn-block btn-lg btn-primary WMQ_light WMQ_BTN_single" role="button" style="vertical-align:bottom;"><span class="glyphicon glyphicon-remove"></span> OFF</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- END Light Control Panel -->
+
+            <!-- START MPC Control Panel -->
+                <div class="panel panel-default tab-pane active Tab_Player_MPC Tab_Main" id="Player_MPC">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="label label-default"><span class="glyphicon glyphicon-film"></span> Media Player Control</span></h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <small id="mpc_filename">No video playing</small>
+
+                        <div class="progress progress-striped" id="MPCBar_Base">
+                            <div class="progress-bar" id="MPCBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <button type="button" id="MPC_PlayPause" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-play"></span> Play
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="MPC_Stop" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-stop"></span> Stop
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="MPC_VolumeUp" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-volume-up"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="MPC_VolumeDown" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-volume-down"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="MPC_Mute" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-volume-off"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button type="button" id="MPC_Fullscreen" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" id="MPC_Close" class="btn btn-primary btn-lg btn-block WMQ_mpc">
+                                <span class="glyphicon glyphicon-off"></span> Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- END MPC Control Panel -->
+
+            <!-- START MPC Selection Panel -->
+                <div class="panel panel-default tab-pane Tab_Player_MPC" id="Player_MPCSelection">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="label label-default"><span class="glyphicon glyphicon-film"></span> MPC Select Movie</span></h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        <button type="button" id="MPCSelection_BackFolder" class="btn btn-primary btn-md btn-block disabled">
+                                        <i class="fa fa-folder-o fa-lg"></i> Back ..
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button type="button" id="MPCSelection_ListFiles_1" class="btn btn-primary btn-md btn-block">
+                                        <i class="fa fa-folder-o fa-lg"></i> Folder Downloads
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <button type="button" id="MPCSelection_ListFiles_2" class="btn btn-primary btn-md btn-block">
+                                        <i class="fa fa-folder-o fa-lg"></i> Folder E:\Watch
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- File Selection Panel -->
+                        <div class="panel panel-default" >
+                            <div class="panel-heading" id="MPCSelection_FolderText"><strong><i class="fa fa-folder-open fa-lg"></i> No Folder Selected</strong></div>
+                            <!-- List group -->
+                            <div class="list-group" id="MPC_File_List">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- END MPC Selection Panel -->
+
+            <!-- START iTunes Control Panel -->
+                <div class="panel panel-default tab-pane active Tab_Player_iTunes Tab_Controller_PC Tab_Status_Weather Tab_Main" id="Player_iTunes">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><span class="label label-default"><span class="glyphicon glyphicon-music"></span> iTunes Control</span></h3>
+                    </div>
+                    <div class="panel-body">
+                        <p><small id="iTunes_Title">No music playing</small></p>
+                        <div class="row" id="iTunes_Grid">
+                            <div class="col-sm-3">
+                                <button type="button" id="iTunes_PlayPause" class="btn btn-primary btn-lg btn-block WMQ_itunes">
+                                <span class="glyphicon glyphicon-play"></span> Play
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="iTunes_Stop" class="btn btn-primary btn-lg btn-block WMQ_itunes">
+                                <span class="glyphicon glyphicon-stop"></span> Stop
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="iTunes_VolumeUp" class="btn btn-primary btn-lg btn-block WMQ_itunes">
+                                <span class="glyphicon glyphicon-volume-up"></span> Vol.Up
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" id="iTunes_VolumeDown" class="btn btn-primary btn-lg btn-block WMQ_itunes">
+                                <span class="glyphicon glyphicon-volume-down"></span> Vol.Down
+                                </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" id="iTunes_OpenClose" class="btn btn-primary btn-lg btn-block WMQ_itunes">
+                                <span class="glyphicon glyphicon-off"></span> Open
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- END iTunes Control Panel -->
+
+            </div>
+        <!-- TAB PANE END -->
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <b>Last MQTT message:  </b><small id="message">no message received</small>
+                </div>
+            </div>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <!-- socket.io for communication -->
+    <script type="text/javascript" src="js/socket.io.min.js"></script>
+
+    <!-- .noUIslider Slider -->
+    <script src="js/jquery.nouislider.min.js"></script>
+    <script src="js/tab.js"></script>
+    <script src="js/modernizr.js"></script>
+
+    <!-- Utility Functions -->
+    <script src="js/WebMQonttrol.js"></script>
+
+    <!-- Individual Panel scripts -->
+    <script src="panels/panelLight.js"></script>
+    <script src="panels/panelMPC.js"></script>
+    <script src="panels/paneliTunes.js"></script>
+    <script src="panels/panelMPCSelection.js"></script>
+
+    <!-- Main Script -->
+    <script>
+
+        $(function() {
+
+            //Objects that hold the topic subscriptions and other values for that panel
+            var masterPanel = [panelMPC, panelLight, paneliTunes, panelMPCSelection];
+
+            //Start sudo-constructor on each panel object that has one
+            //Do it before starting the web socket
+            $.each(masterPanel, function(key, obj) {
+                if (typeof obj.__begin__ === 'function')
+                    obj.__begin__();
+            });
+
+            //Resize the page to match the proper size
+            tweakPageForEnvironment(findBootstrapEnvironment());
+
+
+            //Create web socket and start listening for MQTT messages
+            socket.on('connect', function () {
+                socket.on('mqtt', function (lastmsg) {
+
+                    //Save lastmsg
+                    msg = lastmsg;
+                    
+                    console.log(msg);
+
+                    //Forward topic to the right object
+                    $.each(masterPanel, function(key, obj) {
+                        if (obj[msg.topic])
+                            obj[msg.topic]();
+                    });
+
+                    //Preview of MQTT message
+                    $('#message').html(msg.topic + ', ' + msg.payload.substring(0, 100));
+
+                });
+
+                //Topic subscriptions
+                socket.emit('subscribe',
+                    {topic: 'home/light/+/status/#'},
+                    {topic: 'home/player/mpc'},
+                    {topic: 'home/player/mpc/status/#'},
+                    {topic: 'home/player/itunes'},
+                    {topic: 'home/player/itunes/status/#'},
+                    {topic: 'home/web/config/#'},
+                    {topic: 'home/htpc/#'}
+                    );
+            });
+
+            //Check if we have a valid websocket connection
+            socket.on('error', function (err) {
+                logError("Error: " + err);
+            })
+
+            //Show/Hide the panels depending if they have a class with the same ID as the tab
+            $('.tab_control').click(function (e) {
+                e.preventDefault();
+
+                $(this).tab('show');
+                var currentId = "." + $(this).attr('id');
+
+                $(".tab-pane").removeClass("active");
+                $(currentId).addClass("active");
+            })
+
+
+            //noUiSlider Events
+            $('.noUiSlider').noUiSlider({
+                range: [0, 100]
+                ,start: 0
+                ,step: 1
+                ,handles: 1
+                ,serialization: {
+                    resolution: 1
+                }
+                ,set: function(){
+                    socket.emit('publish', {
+                        topic: 'home/light/1/action/set',
+                        message: new String($("#slider1").val())
+                    });
+                }
+                ,slide: function(){
+                    $('#Light_1_Brightness').text($("#slider1").val());
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
